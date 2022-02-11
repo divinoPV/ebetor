@@ -1,0 +1,9 @@
+| Information | |
+|:---:|:---|
+| Issue(s) | <ul><li>[ ] #{ISSUE}</li></ul> | |
+| Impact(s) | <ul><li>[ ] Frontend</li><li>[ ] Backend</li><li>[ ] Database</li><li>[ ] Assets</li><li>[ ] Translations</li><li>[ ] Bundles</li><li>[ ] Processes</li><li>[ ] Infrastructure</li><li>[ ] Documentations</li></ul> | |
+| Browser(s) engine checked | <ul><li>[x] Blink (Google)</li><li>[ ] WebKit (Apple)</li><li>[ ] Gecko (Mozilla)</li><li>[ ] Trident (IE)</li></ul> |
+| Responsive design(s) | <ul><li>[ ] Smart wristband / watch</li><li>Smartphones <ul><li>[ ] portrait and landscape</li><li>[ ] portrait</li><li>[ ] landscape</li></ul></li><li>Tablet <ul><li>[ ] portrait and landscape</li><li>[ ] portrait</li><li>[ ] landscape</li></ul></li><li>[x] Laptops</li><li>[ ] Desktops</li><li>[ ] Large screens</li></ul> |
+| Test(s) | <ul><li>[ ] Unit</li><li>[ ] Integration</li><li>[ ] Regression</li><li>[ ] Acceptance</li></ul> |
+| Command(s) | <ul><li>No command to execute</li></ul> |
+| Difficulty(ies) | <ul><li>No difficulties encountered</li></ul> |
