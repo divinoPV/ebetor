@@ -1,5 +1,7 @@
 ---
-name: Bug reported about: Create a report to help us improve title: '[BRANCH] | Patch - Title'
+name: Bug reported
+about: Create a report to help us improve
+title: '[BRANCH] | Patch - Title'
 
 ---
 
