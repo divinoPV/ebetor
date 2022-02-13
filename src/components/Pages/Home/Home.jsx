@@ -4,10 +4,6 @@ import Main from '../../Organisms/Main/Main';
 import { useAuthenticationStore } from '../../Trumps/Stores/Authentication/store';
 
 const Home = () => {
-  const { authentication } = useAuthenticationStore();
-
-  console.log(authentication);
-
   return <>
     <Header active="home" />
     <Main>
