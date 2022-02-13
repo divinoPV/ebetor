@@ -1,0 +1,3 @@
+@function golden_rectangle($n) {
+  @return #{$n * $phi}#{px};
+}
