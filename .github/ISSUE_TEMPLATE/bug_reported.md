@@ -9,11 +9,9 @@ title: '[BRANCH] | Patch - Title'
 A clear and concise description of what the bug is.
 
 **Bug type**
-<ul>
-  <li>[ ] Aesthetic</li>
-  <li>[ ] Functional</li>
-  <li>[ ] Spelling</li>
-</ul>
+- [ ] Aesthetic
+- [ ] Functional
+- [ ] Spelling
 
 **To reproduce**
 Steps to reproduce the behavior:

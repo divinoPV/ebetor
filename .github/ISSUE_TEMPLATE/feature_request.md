@@ -6,6 +6,4 @@ title: '[BRANCH] | Feature - Title'
 ---
 
 **Task**
-<ul>
-    <li>[ ] the task</li>
-</ul>
+- [ ] the task
