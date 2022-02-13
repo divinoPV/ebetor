@@ -1,0 +1,37 @@
+:root {
+  color: $white;
+}
+
+body {
+  background-color: $black;
+}
+
+header {
+  border-bottom: 4px solid $blue-sapphire;
+  margin-bottom: fibonacci(8);
+  padding: fibonacci(6) fibonacci(10);
+
+  &, nav, & > div:first-child {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  nav {
+    gap: fibonacci(6);
+  }
+
+  & > div:first-child {
+    gap: fibonacci(7);
+  }
+}
+
+main {
+  padding: fibonacci(6) fibonacci(10);
+}
+
+a {
+  &:visited {
+    color: $white;
+  }
+}
