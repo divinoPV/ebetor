@@ -17,10 +17,11 @@ export const AuthenticationProvider = props => {
   const [authentication, dispatch] = useReducer(reducer, initialValue);
 
   useEffect(() => !localStorage.getItem('session') &&
-      authentication.logged && localStorage.setItem('session', JSON.stringify(authentication))
-  , [authentication]);
+      authentication.logged && localStorage.setItem('session', JSON.stringify(authentication)),
+    [authentication]
+  );
 
-  useEffect(() => localStorage.getItem('session') && dispatch(loginSuccess(JSON.parse(localStorage.getItem('session')))), [])
+  useEffect(() => localStorage.getItem('session') && dispatch(loginSuccess(JSON.parse(localStorage.getItem('session')))), []);
 
   return <AuthenticationStore.Provider value={{ authentication, dispatch }} {...props} />;
 };

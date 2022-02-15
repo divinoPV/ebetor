@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Login from '../Pages/Login/Login';
 
 const Home = lazy(() => import ('../Pages/Home/Home'));
 const Leagues = lazy(() => import ('../Pages/League/Leagues'));
@@ -11,6 +10,8 @@ const Players = lazy(() => import ('../Pages/Player/Players'));
 const Series = lazy(() => import ('../Pages/Serie/Series'));
 const Teams = lazy(() => import ('../Pages/Team/Teams'));
 const Tournaments = lazy(() => import ('../Pages/Tournament/Tournaments'));
+const Login = lazy(() => import ('../Pages/Authentication/Login/Login'));
+const Logout = lazy(() => import ('../Pages/Authentication/Logout/Logout'));
 
 const Router = () => <Suspense fallback={<div>Loading...</div>}>
   <Routes>
@@ -24,6 +25,7 @@ const Router = () => <Suspense fallback={<div>Loading...</div>}>
     <Route path="teams" element={<Teams />} />
     <Route path="tournaments" element={<Tournaments />} />
     <Route path="login" element={<Login />} />
+    <Route path="logout" element={<Logout />} />
   </Routes>
 </Suspense>;
 
