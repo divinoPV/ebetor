@@ -8,7 +8,6 @@ const pages = [
   { id: 7, name: 'series' },
   { id: 8, name: 'teams' },
   { id: 9, name: 'tournaments' },
-  { id: 10, name: 'login' }
 ];
 
 export default pages;
