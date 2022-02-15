@@ -8,16 +8,18 @@ import styles from './Navbar.module.scss';
 const Navbar = ({ active }) => {
   const login = 'login';
   const logout = 'logout';
-  
+
   const [links, setLinks] = useState(pages);
 
   const { authentication } = useAuthenticationStore();
 
   let element = value => ({ id: links.slice(-1)[0].id + 1, name: value });
 
-  const addPage = authentication.logged
-      ? !links.find(e => e.name === logout) && links.push(element(logout)) && links.filter(e => e.name !== login)
-      : !links.find(e => e.name === login) && links.push(element(login)) && links.filter(e => e.name !== logout);
+  const statusAuth = (reverse = false) => reverse ? !authentication.logged ? logout : login : authentication.logged ? logout : login;
+
+  const filter = links.filter(e => e.name !== statusAuth(true));
+
+  const addPage = ((!links.find(e => e.name === statusAuth()) && links.push(element(statusAuth()))) && filter) || filter;
 
   useEffect(() => setLinks(addPage ? addPage : links), [authentication]);
 
