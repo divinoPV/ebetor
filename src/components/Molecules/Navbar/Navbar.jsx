@@ -7,21 +7,30 @@ import styles from './Navbar.module.scss';
 
 const Navbar = ({ active }) => {
   const login = 'login';
+  const register = 'register';
   const logout = 'logout';
 
   const [links, setLinks] = useState(pages);
 
   const { authentication } = useAuthenticationStore();
 
-  let element = value => ({ id: links.slice(-1)[0].id + 1, name: value });
+  const addAuthLinks = (() => {
+    const newPages = [];
+    const statusAuth = authentication.logged ? logout : login;
+    const element = value => ({ id: links.slice(-1)[0].id + newPages.length + 1, name: value });
 
-  const statusAuth = (reverse = false) => reverse ? !authentication.logged ? logout : login : authentication.logged ? logout : login;
+    newPages.push(...links.filter(e => e.name !== !authentication.logged ? logout : login));
 
-  const filter = links.filter(e => e.name !== statusAuth(true));
+    !links.find(e => e.name === statusAuth) && newPages.push(element(statusAuth));
 
-  const addPage = ((!links.find(e => e.name === statusAuth()) && links.push(element(statusAuth()))) && filter) || filter;
+    authentication.logged
+      ? links.find(e => e.name === register) && newPages.push(...links.filter(e => e.name === register))
+      : !links.find(e => e.name === register) && newPages.push(element(register));
 
-  useEffect(() => setLinks(addPage ? addPage : links), [authentication]);
+    return newPages;
+  })();
+
+  useEffect(() => setLinks(addAuthLinks), [authentication]);
 
   return <nav>
     {links.map(link => (

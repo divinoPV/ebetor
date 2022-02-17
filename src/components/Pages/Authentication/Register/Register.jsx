@@ -4,24 +4,29 @@ import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Navigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import ButtonForm from '../../../Atoms/Button/ButtonForm/ButtonForm';
 
+import Header from '../../../Organisms/Header/Header';
 import Main from '../../../Organisms/Main/Main';
 import FormControl from '../../../Trumps/FormControl';
-import Header from '../../../Organisms/Header/Header';
-import ButtonForm from '../../../Atoms/Button/ButtonForm/ButtonForm';
-import { loginFail, loginSuccess } from '../../../Trumps/Stores/Authentication/actions';
+import { registrationFail, registrationSuccess } from '../../../Trumps/Stores/Authentication/actions';
 import { useAuthenticationStore } from '../../../Trumps/Stores/Authentication/store';
 
-const Login = () => {
+const Register = () => {
   const { authentication, dispatch } = useAuthenticationStore();
 
-  const [user, setUser] = useState({ email: '', password: '' });
+  const [user, setUser] = useState({ name: '', email: '', password: '' });
 
   const [users, setUsers] = useState([]);
 
-  const initialValues = { email: '', password: '' };
+  const [autoIncrement, setAutoIncrement] = useState(0);
+
+  const initialValues = { name: '', email: '', password: '' };
 
   const validationSchema = Yup.object({
+    name: Yup
+      .string()
+      .required('Vous devez saisir un nom'),
     email: Yup
       .string()
       .email('Le format de l\'email est invalide')
@@ -31,21 +36,29 @@ const Login = () => {
 
   useEffect(() => (async () => setUsers((await axios.get('http://localhost:3001/users'))?.data))(), []);
 
+  useEffect(() => (async () => setAutoIncrement((await axios.get('http://localhost:3001/users'))?.data.slice(-1)[0].id + 1))(), []);
+
   return authentication.logged ? <Navigate to="/" /> : <>
-    <Header active="login" />
+    <Header active="register" />
     <Main>
       {authentication.error && <strong>{authentication.error}</strong>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={e => e.preventDefault ||
-          dispatch(users.filter(u => u.email === user.email && u.password === user.password).length > 0
-            ? loginSuccess(Object.fromEntries(Object.entries(users[0]).filter(e => e[0] !== 'password')))
-            : loginFail('Identifiants incorrect !')
+          dispatch(!users.filter(u => u.email === user.email).length > 0
+            ? registrationSuccess({ id: autoIncrement, ...user })
+            : registrationFail('Cette adresse email est déjà utilisée !')
           )
         }
       >
         {formik => <Form>
+          <FormControl onInput={e => setUser({ ...user, name: e.target.value })}
+                       control="input"
+                       type="text"
+                       label="Name"
+                       name="name"
+          />
           <FormControl onInput={e => setUser({ ...user, email: e.target.value })}
                        control="input"
                        type="email"
@@ -65,4 +78,4 @@ const Login = () => {
   </>;
 };
 
-export default Login;
+export default Register;
