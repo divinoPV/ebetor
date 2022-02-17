@@ -6,33 +6,28 @@ const reducer = (state, action) => ({
     name: action.name,
     email: action.email,
     coins: action.coins,
-    logged: true,
-    error: null
+    logged: true
   },
   [actions.LOGIN_FAIL]: {
-    id: null,
-    name: null,
-    email: null,
-    coins: null,
     logged: false,
     error: action.error
   },
-  [actions.REGISTRATION]: {
-    // id: (async () => (await axios.get('http://localhost:3001/users'))?.data.slice(-1)[0].id + 1)(),
+  [actions.REGISTRATION_SUCCESS]: {
+    // id: await (async () => (await axios.get('http://localhost:3001/users'))?.data.slice(-1)[0].id + 1)(),
     id: action.id,
     name: action.name,
     email: action.email,
+    password: action.password,
     coins: 0,
+    logged: true,
+    registration: true
+  },
+  [actions.REGISTRATION_FAIL]: {
     logged: false,
     error: action.error
   },
   [actions.LOGOUT]: {
-    id: null,
-    name: null,
-    email: null,
-    coins: null,
-    logged: false,
-    error: null
+    logged: false
   },
   '': state
 }[action.type]);
