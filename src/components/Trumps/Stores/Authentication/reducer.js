@@ -18,7 +18,7 @@ const reducer = (state, action) => ({
     name: action.name,
     email: action.email,
     password: action.password,
-    coins: 0,
+    coins: 100,
     logged: true,
     registration: true
   },

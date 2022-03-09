@@ -1,16 +1,16 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { AuthenticationProvider } from './components/Trumps/Stores/Authentication/store';
 import Router from './components/Trumps/Router';
 
 import './style/ebetor.scss';
+import Store from './components/Trumps/Stores/Store';
 
 ReactDOM.render(
-  <AuthenticationProvider>
+  <Store>
     <BrowserRouter>
       <Router />
     </BrowserRouter>
-  </AuthenticationProvider>,
+  </Store>,
   document.getElementById('ebetor')
 );

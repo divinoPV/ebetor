@@ -5,18 +5,16 @@ import reducer from './reducer';
 
 export const AuthenticationStore = createContext();
 
-const initialValue = {
-  id: null,
-  email: null,
-  name: null,
-  coins: null,
-  logged: false,
-  registration: false,
-  error: null
-};
-
 export const AuthenticationProvider = props => {
-  const [authentication, dispatch] = useReducer(reducer, initialValue);
+  const [authentication, dispatch] = useReducer(reducer, {
+    id: null,
+    email: null,
+    name: null,
+    coins: null,
+    logged: false,
+    registration: false,
+    error: null
+  });
 
   useEffect(() => {
     authentication.registration && axios.post(
@@ -24,8 +22,7 @@ export const AuthenticationProvider = props => {
       Object.fromEntries(Object.entries(authentication).filter(e => !['logged', 'registration'].includes(e[0])))
     );
 
-    !localStorage.getItem('session') &&
-    authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
+    !localStorage.getItem('session') && authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
   }, [authentication]);
 
   useEffect(() => localStorage.getItem('session') && dispatch(loginSuccess(JSON.parse(localStorage.getItem('session')))), []);
