@@ -21,7 +21,7 @@ const Header = ({ active }) => {
 
     return <header>
       <div>
-        <Logo url="/media/favicon_io/favicon.ico" alt="Logo du site Ebetor" />
+        <Logo url="/medias/favicon_io/favicon.ico" alt="Logo du site Ebetor" />
         <Title text="Ebetor" />
       </div>
       {authentication.logged && <div>
