@@ -7,10 +7,10 @@ import Select from '../Molecules/Controls/Select/Select';
 const FormControl = ({ control, ...rest }) => ({
   'input': <Input {...rest} />,
   'textarea': <Input control="textarea" {...rest} />,
-  'select': <Select control={control} {...rest} />,
-  'radio': <Radio control={control} {...rest} />,
-  'checkbox': <Checkbox control={control} {...rest} />,
-  'date': <Date control={control} {...rest} />,
+  'select': <Select {...rest} />,
+  'radio': <Radio {...rest} />,
+  'checkbox': <Checkbox {...rest} />,
+  'date': <Date {...rest} />,
   'default': null
 }[control]);
 
