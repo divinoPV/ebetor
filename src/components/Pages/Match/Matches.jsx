@@ -1,16 +1,41 @@
 import { useEffect, useState } from 'react';
 import axios from '../../../utils/axios';
+import MatchItem from '../../Molecules/Items/MatchItem/MatchItem';
+import ItemsContainer from '../../Organisms/Container/ItemsContainer/ItemsContainer';
 
 import Header from '../../Organisms/Header/Header';
 import Main from '../../Organisms/Main/Main';
+import { useBetStore } from '../../Trumps/Stores/Bet/store';
 
 const Matches = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+
   const [matches, setMatches] = useState([]);
   const [videogames, setGames] = useState([]);
+  const [message, setMessage] = useState(false);
 
-  useEffect(() => {
-    (async () => setMatches((await axios.get('matches?page=1&per_page=50'))?.data))();
-  }, []);
+  const { bet } = useBetStore();
+
+  const matchesFiler = async (m, fromBet = false) => {
+    let newMatches = [];
+
+    if (queryParams.get('league')) {
+      newMatches = m.filter(e => e.league_id === parseInt(queryParams.get('league')));
+      newMatches.length === 0 && setMessage('Aucun matches trouver pour la league sélectionné');
+    }
+
+    if (bet.videogame) {
+      newMatches = m.filter(e => e.videogame.id === bet.videogame.id);
+      fromBet && newMatches.length === 0 && setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}`);
+    }
+
+    newMatches.length !== 0 ? setMessage(false) || setMatches(newMatches) : setMatches(m);
+  };
+
+  const url = 'matches?sort=name&page=1&per_page=50';
+
+  useEffect(() => (async () => matchesFiler((await axios.get(url))?.data))(), []);
+  useEffect(() => (async () => matchesFiler((await axios.get(url))?.data, true))(), [bet]);
 
   useEffect(() => {
     let newGames = [];
@@ -21,15 +46,15 @@ const Matches = () => {
   return <>
     <Header active="matches" />
     <Main>
+      {message && <strong>{message}</strong>}
       {videogames.map(videogame => (
         <div key={videogame.id}>
           <span>{videogame.name}</span>
-          {matches.filter(match => videogame.name === match.videogame.name).map(match => (
-            <div key={match.id}>
-              <span>{match.name}</span>
-            </div>
-          ))}
-          <br />
+          <ItemsContainer>
+            {matches.filter(match => videogame.name === match.videogame.name).map(match => (
+              <MatchItem key={match.id} match={match} />
+            ))}
+          </ItemsContainer>
         </div>
       ))}
     </Main>

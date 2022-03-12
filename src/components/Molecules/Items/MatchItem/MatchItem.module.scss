@@ -1,0 +1,43 @@
+@import '../../../../style/settings/colors';
+
+.MatchItem {
+  align-items: center;
+  background: $blue-sapphire;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 13px;
+  text-decoration: none;
+
+  &__bet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__buttons {
+      align-items: center;
+      display: flex;
+      gap: 13px;
+      justify-content: center;
+    }
+
+    &__title {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__leading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__status {
+    background: $crimson;
+    border-radius: 10px;
+    padding: 5px 8px;
+  }
+}
