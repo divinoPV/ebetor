@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createContext, useReducer, useContext, useEffect } from 'react';
+import { createContext, useReducer, useContext, useEffect, useState } from 'react';
 import { loginSuccess } from './actions';
 import reducer from './reducer';
 
@@ -22,7 +22,7 @@ export const AuthenticationProvider = props => {
       Object.fromEntries(Object.entries(authentication).filter(e => !['logged', 'registration'].includes(e[0])))
     );
 
-    !localStorage.getItem('session') && authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
+    authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
   }, [authentication]);
 
   useEffect(() => localStorage.getItem('session') && dispatch(loginSuccess(JSON.parse(localStorage.getItem('session')))), []);
