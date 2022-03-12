@@ -6,7 +6,7 @@ const Select = ({ label, name, options, ...rest }) => <div>
   <label>
     {label}
     <Field as="select" name={name} {...rest}>
-      <Option value="" />
+      <Option value="">Aucun</Option>
       {options.map(option => <Option key={option.id} value={option.slug}>{option.name}</Option>)}
     </Field>
   </label>

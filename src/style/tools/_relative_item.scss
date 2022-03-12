@@ -1,0 +1,9 @@
+@mixin relative_item($height, $width) {
+  & {
+    height: $height;
+    max-width: $width;
+    min-width: $width;
+    overflow: hidden;
+    position: relative;
+  }
+}

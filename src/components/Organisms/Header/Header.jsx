@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import axios from '../../../utils/axios';
 
-import Logo from '../../Atoms/Logo/Logo';
+import Logo from '../../Atoms/Images/Logo/Logo';
 import Navbar from '../../Molecules/Navbar/Navbar';
-import Title from '../../Atoms/Title/Title';
+import Title from '../../Atoms/Titles/Title';
 import FormControl from '../../Trumps/FormControl';
 import { useAuthenticationStore } from '../../Trumps/Stores/Authentication/store';
 import { setVideogame } from '../../Trumps/Stores/Bet/actions';
@@ -37,8 +37,8 @@ const Header = ({ active }) => {
             <FormControl control="select"
                          label="Jeux"
                          name="videogame"
-                         onChange={e => dispatch(setVideogame({ videogame: e.target.value || null }))}
-                         value={bet.videogame || ''}
+                         onChange={e => dispatch(setVideogame({ videogame: videogames.find(v => v.slug === e.target.value) || null }))}
+                         value={bet.videogame?.slug || ''}
                          options={videogames}
             />
           </Form>}
