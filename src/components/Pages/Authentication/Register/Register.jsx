@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Navigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import ButtonForm from '../../../Atoms/Button/ButtonForm/ButtonForm';
+import ButtonForm from '../../../Atoms/Buttons/Form/ButtonForm';
 
 import Header from '../../../Organisms/Header/Header';
 import Main from '../../../Organisms/Main/Main';

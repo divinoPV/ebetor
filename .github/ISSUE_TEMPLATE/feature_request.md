@@ -5,5 +5,5 @@ title: '[BRANCH] | Feature - Title'
 
 ---
 
-**Task**
+**Tasks**
 - [ ] the task

@@ -1,0 +1,27 @@
+@import '../../../../style/tools/relative_item';
+@import '../../../../style/settings/colors';
+
+.LeagueItem {
+  align-items: center;
+  background: $blue-sapphire;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 13px;
+  text-decoration: none;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__image {
+    @include relative_item(144px, 144px);
+  }
+
+  &:hover {
+    box-shadow: 8.0px 16.0px 16.0px hsl(0deg 0% 0% / 0.25);
+  }
+}

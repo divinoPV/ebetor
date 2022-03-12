@@ -1,0 +1,7 @@
+@import '../../../../style/tools/absolute_center';
+
+.ImageItem {
+  max-height: 100%;
+  max-width: 100%;
+  @include absolute_center();
+}

@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import Main from '../../../Organisms/Main/Main';
 import FormControl from '../../../Trumps/FormControl';
 import Header from '../../../Organisms/Header/Header';
-import ButtonForm from '../../../Atoms/Button/ButtonForm/ButtonForm';
+import ButtonForm from '../../../Atoms/Buttons/Form/ButtonForm';
 import { loginFail, loginSuccess } from '../../../Trumps/Stores/Authentication/actions';
 import { useAuthenticationStore } from '../../../Trumps/Stores/Authentication/store';
 
