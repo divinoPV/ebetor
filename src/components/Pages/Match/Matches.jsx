@@ -56,7 +56,6 @@ const Matches = () => {
     axios.get(`${slugGame}/matches?sort=begin_at&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}${statusSearch}`).then(response => {
       let nbElements = 0;
 
-      console.log(response.data.length);
       if (response.data.length === 0) {
         setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}` + (status.length !== 0 ? ` et dont le status est ${getStatus(status).toLowerCase()}` : '') + '.');
         axios.get('matches?sort=name&page=1&per_page=50').then(r => {

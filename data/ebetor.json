@@ -5,7 +5,7 @@
       "email": "divino@ebetor.co",
       "name": "Hugo",
       "password": "cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860",
-      "coins": 509
+      "coins": 489
     },
     {
       "id": 2,
@@ -126,6 +126,22 @@
       "coins": 10,
       "status": "waiting_result",
       "id": 13
+    },
+    {
+      "user": 1,
+      "match": 624422,
+      "team": 129230,
+      "coins": 10,
+      "status": "waiting_result",
+      "id": 14
+    },
+    {
+      "user": 1,
+      "match": 625422,
+      "team": 1662,
+      "coins": 10,
+      "status": "waiting_result",
+      "id": 15
     }
   ]
 }
