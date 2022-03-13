@@ -24,7 +24,6 @@ const TeamItem = ({ alt, children, className, src, team, ...rest }) =>
       <div className={`${styles['TeamItem__players']}`}>
         <strong>Les joueurs :</strong>
         {team.players.map(player =>
-          console.log(player) ||
           <div key={player.id} className={`${styles['TeamItem__player']}`}>
             {player.image_url &&
               <div className={`${styles['TeamItem__player__image']}`}>

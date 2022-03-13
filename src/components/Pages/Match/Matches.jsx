@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import axios from '../../../utils/axios';
 import { Formik, Form } from 'formik';
 
@@ -13,43 +14,59 @@ import FormControl from '../../Trumps/FormControl';
 import styles from './Matches.module.scss';
 
 const Matches = () => {
-  const queryParams = new URLSearchParams(window.location.search);
-
   const [matches, setMatches] = useState([]);
   const [videogames, setVideogames] = useState([]);
   const [message, setMessage] = useState(false);
   const [status, setStatus] = useState('');
+  const [pageCount, setPageCount] = useState(1);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   const { bet } = useBetStore();
   const { authentication } = useAuthenticationStore();
 
-  const matchesFilter = async (matchesParam, fromBet = false) => {
-    let newMatches = [];
-
-    if (queryParams.get('league')) {
-      newMatches = matchesParam.filter(match => match.league_id === parseInt(queryParams.get('league')));
-      newMatches.length === 0 && setMessage('Aucun matches trouver pour la league sélectionné.');
-    }
-
-    if (bet.videogame) {
-      newMatches = matchesParam.filter(match => match.videogame.id === bet.videogame.id);
-      fromBet && newMatches.length === 0 && setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}.`);
-    }
-
-    newMatches.length !== 0 ? setMessage(false) || setMatches(newMatches) : setMatches(matchesParam);
-  };
+  const itemsPerPage = 30;
 
   const url = 'matches?sort=name&page=1&per_page=50';
 
-  useEffect(() => (async () => matchesFilter((await axios.get(url))?.data))(), []);
-  useEffect(() => (async () => matchesFilter((await axios.get(url))?.data, true))(), [bet]);
-  useEffect(() => {
-    axios.get(url).then(response => {
-      let result = response.data;
-      status.length !== 0 && (result = result.filter(match => match.status === status));
-      setMatches(result);
+  useEffect(() => (async () => {
+    const slugGame = (() => {
+      if (bet.videogame) {
+        switch (bet.videogame.slug) {
+          case 'lol-wild-rift':
+            return 'lol-wild-rift';
+          case 'league-of-legends':
+            return 'lol';
+          default:
+            return bet.videogame.slug.split('').map(v => v === '-' ? '' : v).join('');
+        }
+      }
+
+      return '';
+    })();
+
+    const statusSearch = status.length !== 0 ? `&search[status]=${status}` : '';
+
+    axios.get(`${slugGame}/matches?sort=name&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}${statusSearch}`).then(response => {
+      let nbElements = 0;
+
+      console.log(response.data.length);
+      if (response.data.length === 0) {
+        setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}.`);
+        axios.get('matches?sort=name&page=1&per_page=50').then(r => {
+          nbElements = r.headers['x-total'];
+          setMatches(r.data);
+        });
+      } else {
+        setMessage(false);
+        nbElements = response.headers['x-total'];
+        setMatches(response.data);
+      }
+
+      setTotalItems(nbElements);
+      setPageCount(~~(nbElements / itemsPerPage));
     });
-  }, [status]);
+  })(), [itemOffset, itemsPerPage, bet, status]);
 
   useEffect(() => {
     let newVideogames = [];
@@ -121,6 +138,16 @@ const Matches = () => {
           </ItemsContainer>
         </div>
       )}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="suivant >"
+        onPageChange={e => setItemOffset((e.selected * itemsPerPage) % totalItems)}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< précédent"
+        renderOnZeroPageCount={null}
+        className="o-paginator"
+      />
     </Main>
   </>;
 };

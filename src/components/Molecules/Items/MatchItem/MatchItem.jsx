@@ -43,8 +43,8 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
   }, [bets]);
 
   const status = match.status;
-  const opponent1 = match.opponents[0].opponent;
-  const opponent2 = match.opponents[1].opponent;
+  const opponent1 = match.opponents[0]?.opponent;
+  const opponent2 = match.opponents[1]?.opponent;
 
   const getStatus = status => ({
     'canceled': 'Annulé',
@@ -78,50 +78,55 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
 
   return <div className={`${styles['MatchItem']} ${className ?? ''}`} {...rest}>
     <div className={`${styles['MatchItem__leading']}`}>
-      <span className={`${styles['MatchItem__leading__title']}`}>{match.name} {status !== 'canceled' && '- ' + dayjs(match.begin_at).format('\l\e DD/MM \à hh:mm A')}</span>
+      <span
+        className={`${styles['MatchItem__leading__title']}`}>{match.name} {status !== 'canceled' && '- ' + dayjs(match.begin_at).format('\l\e DD/MM \à hh:mm A')}</span>
       <span className={`${styles['MatchItem__leading__status']}`}>{getStatus(status)}</span>
     </div>
-    {authentication.logged && status === 'not_started' && <div className={`${styles['MatchItem__bet']}`}>
-      <div className={`${styles['MatchItem__bet__titleContainer']}`}>
-        <strong className={`${styles['MatchItem__bet__title']}`}>Prêt à devenir millionnaire ou à tout perdre ?</strong>
-        <span>{nbBets !== 0 ? 'Déjà ' + nbBets + ' pari' + (nbBets > 1 ? 's' : '') : 'Aucun pari pour le moment'}</span>
-      </div>
-      <div className={`${styles['MatchItem__bet__action']}`}>
-        {!alreadyBet
-          ? <div className={`${styles['MatchItem__bet__action__input']}`}>
-            {authentication.coins === 0
-              ? <span>Vous ne possédez pas assez de jetons ! :'(</span>
-              : <span>Choisissez le nombre de coins à parier :</span>
-            }
-            <input disabled={authentication.coins === 0}
-                   max={authentication.coins}
-                   min="10"
-                   onChange={handleChange}
-                   style={{ width: `calc(${coins.toString().length}ch + 2ch)` }}
-                   type="number"
-                   value={coins}
-            />
-          </div>
-          : <span>
-            Vous avez déjà parier pour {alreadyBet.team === opponent1.id ? opponent1.name : opponent2.name}. <br/>
+    {authentication.logged && status === 'not_started' && match.opponents.length !== 0 &&
+      <div className={`${styles['MatchItem__bet']}`}>
+        <div className={`${styles['MatchItem__bet__titleContainer']}`}>
+          <strong className={`${styles['MatchItem__bet__title']}`}>Prêt à devenir millionnaire ou à tout perdre
+            ?</strong>
+          <span>{nbBets !== 0 ? 'Déjà ' + nbBets + ' pari' + (nbBets > 1 ? 's' : '') : 'Aucun pari pour le moment'}</span>
+        </div>
+        <div className={`${styles['MatchItem__bet__action']}`}>
+          {!alreadyBet
+            ? <div className={`${styles['MatchItem__bet__action__input']}`}>
+              {authentication.coins === 0
+                ? <span>Vous ne possédez pas assez de jetons ! :'(</span>
+                : <span>Choisissez le nombre de coins à parier :</span>
+              }
+              <input disabled={authentication.coins === 0}
+                     max={authentication.coins}
+                     min="10"
+                     onChange={handleChange}
+                     style={{ width: `calc(${coins.toString().length}ch + 2ch)` }}
+                     type="number"
+                     value={coins}
+              />
+            </div>
+            : <span>
+            Vous avez déjà parier pour {alreadyBet.team === opponent1.id ? opponent1.name : opponent2.name}. <br />
             Malheuresement il est impossible de changer son pari eheh ! Croisez les doigts pour qu'il passe :P
           </span>
-        }
-        <div className={`${styles['MatchItem__bet__action__buttons']}`}>
-          {!alreadyBet && <span>Parier pour :</span>}
-          <button disabled={authentication.coins === 0 || alreadyBet}
-                  onClick={() => toBet(opponent1.id)}
-          >
-            {opponent1.name}
-          </button>
-          <button disabled={authentication.coins === 0 || alreadyBet}
-                  onClick={() => toBet(opponent2.id)}
-          >
-            {opponent2.name}
-          </button>
+          }
+          <div className={`${styles['MatchItem__bet__action__buttons']}`}>
+            {!alreadyBet && <span>Parier pour :</span>}
+            <button disabled={authentication.coins === 0 || alreadyBet}
+                    onClick={() => toBet(opponent1?.id)}
+            >
+              {opponent1?.name}
+            </button>
+            <button disabled={authentication.coins === 0 || alreadyBet}
+                    onClick={() => toBet(opponent2?.id)}
+            >
+              {opponent2?.name}
+            </button>
+          </div>
         </div>
       </div>
-    </div>}
+    }
+    {match.opponents.length === 0 && <span>Malheuresement vous ne pouvez pas parier sur ce match faute du manque d'informations sur les participants... (BLAME pandascore.co)</span>}
   </div>;
 };
 

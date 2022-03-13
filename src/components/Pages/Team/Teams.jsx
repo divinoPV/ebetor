@@ -34,6 +34,7 @@ const Teams = () => {
 
       return '';
     })();
+
     axios.get(`${slugGame}/teams?sort=name&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}`).then(response => {
       const nbElements = response.headers['x-total'];
       setTotalItems(nbElements);
