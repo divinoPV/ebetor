@@ -1,0 +1,26 @@
+@import '../../../style/settings/colors';
+
+.Homes {
+  &__title {
+    margin-bottom: 34px;
+  }
+
+  a {
+    align-items: center;
+    background: $blue-sapphire;
+    border-radius: 13px;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 13px;
+    text-decoration: none;
+  }
+
+  svg {
+    fill: $white;
+    height: 32px;
+    width: 32px;
+  }
+}
