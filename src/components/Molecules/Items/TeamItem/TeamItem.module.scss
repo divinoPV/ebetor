@@ -1,0 +1,90 @@
+@import '../../../../style/tools/relative_item';
+@import '../../../../style/settings/colors';
+
+.TeamItem {
+  align-items: center;
+  background: $blue-sapphire;
+  border-radius: 13px;
+  color: $white;
+  display: flex;
+  flex: 1 0 100% !important;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 13px;
+  text-decoration: none;
+
+  &__leading {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 95%;
+
+    &__image {
+      margin-right: 34px;
+      @include relative_item(144px, 144px);
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__title {
+      font-size: 21px;
+      line-height: calc(21px * 1.6);
+      font-weight: 600;
+    }
+
+    &__location {
+
+    }
+  }
+
+  &__player {
+    align-items: center;
+    background: darken($blue-sapphire, 20%);
+    border-radius: 21px;
+    display: flex;
+    padding: 13px 21px;
+
+    &s {
+      background: $blue-sapphire;
+      border-radius: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 95%;
+    }
+
+    &__image {
+      margin-right: 34px;
+      @include relative_item(144px, 144px);
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__name {
+      font-size: 21px;
+      line-height: calc(21px * 1.6);
+      font-weight: 600;
+    }
+
+    &__hometown {
+
+    }
+
+    &__birthday {
+
+    }
+  }
+
+  &:hover {
+    box-shadow: 8.0px 16.0px 16.0px hsl(0deg 0% 0% / 0.25);
+  }
+}
