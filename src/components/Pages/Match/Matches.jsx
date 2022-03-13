@@ -111,7 +111,7 @@ const Matches = () => {
           Aucun matches trouver avec votre recherche... Veuillez réessayer avec des paramètres plus pertinents !
         </span>
       }
-      {videogames && videogames.map(videogame => (
+      {videogames && videogames.map(videogame =>
         <div className={`${styles['Matches__videogame']}`} key={videogame.id}>
           <span className={`${styles['Matches__videogame__title']}`}>{videogame.name}</span>
           <ItemsContainer>
@@ -120,7 +120,7 @@ const Matches = () => {
             ))}
           </ItemsContainer>
         </div>
-      ))}
+      )}
     </Main>
   </>;
 };

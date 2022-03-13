@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from '../../../utils/axios';
-import LeagueItem from '../../Molecules/Items/LeagueItem/LeagueItem';
-import ItemsContainer from '../../Organisms/Container/ItemsContainer/ItemsContainer';
+
+import { useBetStore } from '../../Trumps/Stores/Bet/store';
 
 import Header from '../../Organisms/Header/Header';
 import Main from '../../Organisms/Main/Main';
-import { useBetStore } from '../../Trumps/Stores/Bet/store';
+import ItemsContainer from '../../Organisms/Container/ItemsContainer/ItemsContainer';
+import LeagueItem from '../../Molecules/Items/LeagueItem/LeagueItem';
 
 const Leagues = () => {
   const [leagues, setLeagues] = useState([]);
