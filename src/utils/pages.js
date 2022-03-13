@@ -1,7 +1,6 @@
 const pages = [
   { id: 1, name: 'home' },
   { id: 2, name: 'leagues' },
-  { id: 3, name: 'videogames' },
   { id: 4, name: 'lives' },
   { id: 5, name: 'matches' },
   { id: 6, name: 'players' },

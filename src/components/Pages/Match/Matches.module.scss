@@ -1,0 +1,72 @@
+@import '../../../style/settings/colors';
+
+.Matches {
+  &__leading {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 21px;
+
+    &__notLogged {
+      background: $crimson;
+    }
+
+    &__message {
+      background: $mandarin;
+    }
+
+    &__notLogged, &__message {
+      align-items: center;
+      border-radius: 21px;
+      display: inline-flex;
+      padding: 5px 13px;
+      width: fit-content;
+
+      svg {
+        fill: $white;
+        height: 16px;
+        margin-right: 5px;
+        width: 16px;
+      }
+    }
+  }
+
+  &__videogame {
+    margin-bottom: 34px;
+
+    &__title {
+      display: inline-block;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: calc(32px * 1.4);
+      margin-bottom: 21px;
+    }
+  }
+
+  &__matchesNotFound {
+    align-items: center;
+    background: $mandarin;
+    border-radius: 21px;
+    display: inline-flex;
+    margin-top: 34px;
+    padding: 5px 13px;
+    width: fit-content;
+
+    svg {
+      fill: $white;
+      height: 16px;
+      margin-right: 5px;
+      width: 16px;
+    }
+  }
+
+  &__form {
+    &__select {
+      float: right;
+
+      select {
+        margin-left: 8px;
+      }
+    }
+  }
+}

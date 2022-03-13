@@ -16,7 +16,6 @@ const Login = () => {
   const { authentication, dispatch } = useAuthenticationStore();
 
   const [user, setUser] = useState({ email: '', password: '' });
-
   const [users, setUsers] = useState([]);
 
   const initialValues = { email: '', password: '' };
@@ -40,7 +39,7 @@ const Login = () => {
         validationSchema={validationSchema}
         onSubmit={e => e.preventDefault ||
           dispatch(users.filter(u => u.email === user.email && u.password === user.password).length > 0
-            ? loginSuccess(Object.fromEntries(Object.entries(users[0]).filter(e => e[0] !== 'password')))
+            ? loginSuccess(Object.fromEntries(Object.entries(users.filter(u => u.email === user.email && u.password === user.password)[0]).filter(e => e[0] !== 'password')))
             : loginFail('Identifiants incorrect !')
           )
         }

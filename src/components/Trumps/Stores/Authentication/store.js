@@ -12,6 +12,7 @@ export const AuthenticationProvider = props => {
     name: null,
     coins: null,
     logged: false,
+    logout: false,
     registration: false,
     error: null
   });
@@ -22,7 +23,8 @@ export const AuthenticationProvider = props => {
       Object.fromEntries(Object.entries(authentication).filter(e => !['logged', 'registration'].includes(e[0])))
     );
 
-    !localStorage.getItem('session') && authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
+    authentication.logged && localStorage.setItem('session', JSON.stringify(authentication));
+    localStorage.getItem('session') && authentication.logout && localStorage.removeItem('session');
   }, [authentication]);
 
   useEffect(() => localStorage.getItem('session') && dispatch(loginSuccess(JSON.parse(localStorage.getItem('session')))), []);
