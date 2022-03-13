@@ -27,7 +27,13 @@ const Matches = () => {
 
   const itemsPerPage = 30;
 
-  const url = 'matches?sort=name&page=1&per_page=50';
+  const getStatus = status => ({
+    'canceled': 'Annulé',
+    'finished': 'Terminé',
+    'not_started': 'Commence bientôt',
+    'postponed': 'Reporté',
+    'running': 'En cours'
+  }[status]);
 
   useEffect(() => (async () => {
     const slugGame = (() => {
@@ -47,12 +53,12 @@ const Matches = () => {
 
     const statusSearch = status.length !== 0 ? `&search[status]=${status}` : '';
 
-    axios.get(`${slugGame}/matches?sort=name&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}${statusSearch}`).then(response => {
+    axios.get(`${slugGame}/matches?sort=begin_at&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}${statusSearch}`).then(response => {
       let nbElements = 0;
 
       console.log(response.data.length);
       if (response.data.length === 0) {
-        setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}.`);
+        setMessage(`Aucun matches trouver pour le jeu vidéo ${bet.videogame.name}` + (status.length !== 0 ? ` et dont le status est ${getStatus(status).toLowerCase()}` : '') + '.');
         axios.get('matches?sort=name&page=1&per_page=50').then(r => {
           nbElements = r.headers['x-total'];
           setMatches(r.data);
