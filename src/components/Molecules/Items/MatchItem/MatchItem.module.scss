@@ -95,6 +95,29 @@
     }
   }
 
+  &__cantBet {
+    align-items: center;
+    background: $antique-ruby;
+    border-radius: 21px;
+    display: inline-flex;
+    margin-top: 13px;
+    padding: 5px 13px;
+
+    svg {
+      fill: $white;
+      height: 16px;
+      width: 16px;
+
+      &:first-child {
+        margin-right: 8px;
+      }
+
+      &:last-child {
+        margin-left: 8px;
+      }
+    }
+  }
+
   &__leading {
     align-items: center;
     display: flex;
@@ -108,7 +131,8 @@
     }
 
     &__status {
-      background: $crimson;
+      background: $columbia-blue;
+      color: $gunmetal;
       border-radius: 21px;
       padding: 5px 13px;
     }
