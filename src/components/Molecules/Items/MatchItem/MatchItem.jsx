@@ -48,8 +48,8 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
 
   const getStatus = status => ({
     'canceled': 'Annulé',
-    'finished': 'Fini',
-    'not_started': 'Pas commencé',
+    'finished': 'Terminé',
+    'not_started': 'Commence bientôt',
     'postponed': 'Reporté',
     'running': 'En cours'
   }[status]);
@@ -89,7 +89,10 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
       <div className={`${styles['MatchItem__bet__action']}`}>
         {!alreadyBet
           ? <div className={`${styles['MatchItem__bet__action__input']}`}>
-            {authentication.coins === 0 && <span>Vous ne possédez pas assez de jetons ! :'(</span>}
+            {authentication.coins === 0
+              ? <span>Vous ne possédez pas assez de jetons ! :'(</span>
+              : <span>Choisissez le nombre de coins à parier :</span>
+            }
             <input disabled={authentication.coins === 0}
                    max={authentication.coins}
                    min="10"
@@ -99,9 +102,13 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
                    value={coins}
             />
           </div>
-          : <span>Vous avez déjà parier pour {alreadyBet.team === opponent1.id ? opponent1.name : opponent2.name}</span>
+          : <span>
+            Vous avez déjà parier pour {alreadyBet.team === opponent1.id ? opponent1.name : opponent2.name}. <br/>
+            Malheuresement il est impossible de changer son pari eheh ! Croisez les doigts pour qu'il passe :P
+          </span>
         }
         <div className={`${styles['MatchItem__bet__action__buttons']}`}>
+          {!alreadyBet && <span>Parier pour :</span>}
           <button disabled={authentication.coins === 0 || alreadyBet}
                   onClick={() => toBet(opponent1.id)}
           >

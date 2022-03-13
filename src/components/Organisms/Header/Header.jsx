@@ -12,43 +12,41 @@ import { useBetStore } from '../../Trumps/Stores/Bet/store';
 import styles from './Header.module.scss';
 
 const Header = ({ active }) => {
-    const { authentication } = useAuthenticationStore();
+  const [videogames, setVideogames] = useState([]);
 
-    const { bet, dispatch } = useBetStore();
+  const { authentication } = useAuthenticationStore();
+  const { bet, dispatch } = useBetStore();
 
-    const [videogames, setVideogames] = useState([]);
+  useEffect(() => (async () => setVideogames((await axios.get('videogames?page=1&per_page=50'))?.data))(), []);
 
-    useEffect(() => (async () => setVideogames((await axios.get('videogames?page=1&per_page=50'))?.data))(), []);
-
-    return <header>
-      <div>
-        <Logo url="/medias/favicon_io/favicon.ico" alt="Logo du site Ebetor" />
-        <Title text="Ebetor" />
-      </div>
-      {authentication.logged && <div>
-        <span>{authentication.name} | </span>
-        <span>{authentication.coins} coins</span>
-      </div>}
-      {videogames &&
-        <Formik
-          initialValues={{ videogame: '' }}
-          onSubmit={e => e.preventDefault}
-        >
-          {formik => <Form>
-            <FormControl className={`${styles['Header__form__select']}`}
-                         control="select"
-                         label="Jeux vidéo :"
-                         name="videogame"
-                         onChange={e => dispatch(setVideogame({ videogame: videogames.find(v => v.slug === e.target.value) || null }))}
-                         value={bet.videogame?.slug || ''}
-                         options={videogames}
-            />
-          </Form>}
-        </Formik>
-      }
-      <Navbar active={active} />
-    </header>;
-  }
-;
+  return <header>
+    <div>
+      <Logo url="/medias/favicon_io/favicon.ico" alt="Logo du site Ebetor" />
+      <Title text="Ebetor" />
+    </div>
+    {authentication.logged && <div>
+      <span>{authentication.name} | </span>
+      <span>{authentication.coins} coins</span>
+    </div>}
+    {videogames &&
+      <Formik
+        initialValues={{ videogame: '' }}
+        onSubmit={e => e.preventDefault}
+      >
+        {formik => <Form>
+          <FormControl className={`${styles['Header__form__select']}`}
+                       control="select"
+                       label="Jeux vidéo :"
+                       name="videogame"
+                       onChange={e => dispatch(setVideogame({ videogame: videogames.find(v => v.slug === e.target.value) || null }))}
+                       value={bet.videogame?.slug || ''}
+                       options={videogames}
+          />
+        </Form>}
+      </Formik>
+    }
+    <Navbar active={active} />
+  </header>;
+};
 
 export default Header;
