@@ -6,6 +6,7 @@ import ItemsContainer from '../../Organisms/Container/ItemsContainer/ItemsContai
 import Header from '../../Organisms/Header/Header';
 import Main from '../../Organisms/Main/Main';
 import { useBetStore } from '../../Trumps/Stores/Bet/store';
+import styles from './Matches.module.scss';
 
 const Matches = () => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -48,11 +49,11 @@ const Matches = () => {
     <Main>
       {message && <strong>{message}</strong>}
       {videogames.map(videogame => (
-        <div key={videogame.id}>
-          <span>{videogame.name}</span>
+        <div className={`${styles['Matches__videogame']}`} key={videogame.id}>
+          <span className={`${styles['Matches__videogame__title']}`}>{videogame.name}</span>
           <ItemsContainer>
             {matches.filter(match => videogame.name === match.videogame.name).map(match => (
-              <MatchItem key={match.id} match={match} />
+              <MatchItem key={match.id} match={match} matches={matches} />
             ))}
           </ItemsContainer>
         </div>

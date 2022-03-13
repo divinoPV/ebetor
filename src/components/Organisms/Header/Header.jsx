@@ -9,6 +9,7 @@ import FormControl from '../../Trumps/FormControl';
 import { useAuthenticationStore } from '../../Trumps/Stores/Authentication/store';
 import { setVideogame } from '../../Trumps/Stores/Bet/actions';
 import { useBetStore } from '../../Trumps/Stores/Bet/store';
+import styles from './Header.module.scss';
 
 const Header = ({ active }) => {
     const { authentication } = useAuthenticationStore();
@@ -34,8 +35,9 @@ const Header = ({ active }) => {
           onSubmit={e => e.preventDefault}
         >
           {formik => <Form>
-            <FormControl control="select"
-                         label="Jeux"
+            <FormControl className={`${styles['Header__form__select']}`}
+                         control="select"
+                         label="Jeux vidéo :"
                          name="videogame"
                          onChange={e => dispatch(setVideogame({ videogame: videogames.find(v => v.slug === e.target.value) || null }))}
                          value={bet.videogame?.slug || ''}

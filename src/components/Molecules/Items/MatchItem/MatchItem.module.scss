@@ -3,28 +3,95 @@
 .MatchItem {
   align-items: center;
   background: $blue-sapphire;
+  border-radius: 13px;
   color: $white;
   display: flex;
+  flex: 1 0 100% !important;
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-  padding: 13px;
+  padding: 21px;
   text-decoration: none;
 
   &__bet {
+    background-color: darken($blue-sapphire, 10%);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    margin-top: 13px;
+    padding: 13px;
+    width: calc(100% - 26px);
 
-    &__buttons {
+    &__action {
       align-items: center;
       display: flex;
       gap: 13px;
-      justify-content: center;
+      justify-content: space-between;
+
+      &__buttons {
+        align-items: center;
+        display: flex;
+        gap: 13px;
+        justify-content: center;
+
+        button {
+          border: none;
+          border-radius: 21px;
+          box-shadow: none;
+          color: $white;
+          padding: 5px 13px;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &[disabled] {
+            cursor: inherit;
+            text-decoration: line-through;
+          }
+        }
+
+        button:first-child {
+          background: $bright-maroon;
+
+          &:hover {
+            background: lighten($bright-maroon, 20%);
+          }
+
+          &[disabled] {
+            color: darken($white, 20%);
+            background: darken($bright-maroon, 20%);
+          }
+        }
+
+        button:nth-child(2) {
+          background: $antique-ruby;
+
+          &:hover {
+            background: lighten($antique-ruby, 20%);
+          }
+
+          &[disabled] {
+            color: darken($white, 20%);
+            background: darken($bright-maroon, 20%);
+          }
+        }
+      }
+
+      &__input {
+        align-items: center;
+        display: flex;
+        gap: 13px;
+      }
     }
 
     &__title {
-      margin-bottom: 8px;
+      &Container {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 21px;
+      }
     }
   }
 
@@ -33,11 +100,17 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
 
-  &__status {
-    background: $crimson;
-    border-radius: 10px;
-    padding: 5px 8px;
+    &__title {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: calc(18px * 1.6);
+    }
+
+    &__status {
+      background: $crimson;
+      border-radius: 21px;
+      padding: 5px 13px;
+    }
   }
 }

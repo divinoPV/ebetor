@@ -1,0 +1,13 @@
+.Matches {
+  &__videogame {
+    margin-bottom: 34px;
+
+    &__title {
+      display: inline-block;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: calc(32px * 1.4);
+      margin-bottom: 21px;
+    }
+  }
+}

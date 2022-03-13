@@ -5,22 +5,31 @@
       "email": "divino@ebetor.co",
       "name": "Hugo",
       "password": "cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860",
-      "coins": 100
+      "coins": 724
     },
     {
       "id": 2,
       "email": "admin@ebetor.co",
       "name": "admin",
       "password": "cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860",
-      "coins": 100
+      "coins": 60
     },
     {
       "id": 3,
       "email": "admin2@ebetor.co",
       "name": "admin2",
       "password": "cd2eb0837c9b4c962c22d2ff8b5441b7b45805887f051d39bf133b583baf6860",
-      "coins": 100
+      "coins": 0
     }
   ],
-  "bets": []
+  "bets": [
+    {
+      "user": 3,
+      "match": 619636,
+      "team": 129874,
+      "coins": 40,
+      "status": "waiting_result",
+      "id": 1
+    }
+  ]
 }

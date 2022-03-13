@@ -27,7 +27,8 @@ const reducer = (state, action) => ({
     error: action.error
   },
   [actions.LOGOUT]: {
-    logged: false
+    logged: false,
+    logout: true
   },
   '': state
 }[action.type]);
