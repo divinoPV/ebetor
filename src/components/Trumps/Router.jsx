@@ -3,7 +3,6 @@ import { lazy, Suspense } from 'react';
 
 const Home = lazy(() => import ('../Pages/Home/Home'));
 const Leagues = lazy(() => import ('../Pages/League/Leagues'));
-const Lives = lazy(() => import ('../Pages/Live/Lives'));
 const Matches = lazy(() => import ('../Pages/Match/Matches'));
 const Players = lazy(() => import ('../Pages/Player/Players'));
 const Series = lazy(() => import ('../Pages/Serie/Series'));
@@ -17,7 +16,6 @@ const Router = () => <Suspense fallback={<div>Loading...</div>}>
   <Routes>
     <Route index element={<Home />} />
     <Route path="leagues" element={<Leagues />} />
-    <Route path="lives" element={<Lives />} />
     <Route path="matches" element={<Matches />} />
     <Route path="players" element={<Players />} />
     <Route path="series" element={<Series />} />
