@@ -82,7 +82,7 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
         className={`${styles['MatchItem__leading__title']}`}>{match.name} {status !== 'canceled' && '- ' + dayjs(match.begin_at).format('\l\e DD/MM \à hh:mm A')}</span>
       <span className={`${styles['MatchItem__leading__status']}`}>{getStatus(status)}</span>
     </div>
-    {authentication.logged && status === 'not_started' && match.opponents.length !== 0 &&
+    {authentication.logged && (status === 'not_started') && match.opponents.length !== 0 &&
       <div className={`${styles['MatchItem__bet']}`}>
         <div className={`${styles['MatchItem__bet__titleContainer']}`}>
           <strong className={`${styles['MatchItem__bet__title']}`}>Prêt à devenir millionnaire ou à tout perdre
@@ -125,6 +125,16 @@ const MatchItem = ({ match, matches, className, ...rest }) => {
           </div>
         </div>
       </div>
+    }
+    {status === 'running' && match.live_embed_url &&
+      <iframe
+        allowFullScreen={true}
+        className={`${styles['MatchItem__live']}`}
+        height="400px"
+        src={`${match.live_embed_url}&parent=localhost&autoplay=false&muted=true`}
+        width="100%"
+      >
+      </iframe>
     }
     {match.opponents.length === 0 &&
       <span className={`${styles['MatchItem__cantBet']}`}>
