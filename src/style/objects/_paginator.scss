@@ -1,0 +1,45 @@
+.o-paginator {
+  background: $blue-sapphire;
+  border-radius: 21px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 34px auto;
+  padding: 13px;
+  width: 80%;
+
+  li a {
+    border: $maximum-blue 1px solid;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 5px 21px;
+
+    &:hover {
+      background: $gunmetal;
+      border: $gunmetal 1px solid;
+    }
+  }
+
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+
+  li.selected a {
+    background-color: $gunmetal;
+    border-color: transparent;
+    color: $white;
+    min-width: 32px;
+  }
+
+  li.disabled a {
+    color: darken($white, 60%);
+  }
+
+  li.disable,
+  li.disabled a {
+    cursor: default;
+  }
+}

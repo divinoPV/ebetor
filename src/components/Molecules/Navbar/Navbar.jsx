@@ -35,7 +35,7 @@ const Navbar = ({ active }) => {
   return <nav>
     {links.map(link => (
       <Link key={link.id}
-            className={active === link.name ? styles.active : undefined}
+            className={active === link.name ? styles['active'] : undefined}
             to={`/${link.name !== links[0].name ? link.name : ''}`}
       >
         {link.name.split('').map((char, key) => key === 0 ? char.toUpperCase() : char.toLowerCase()).join('')}

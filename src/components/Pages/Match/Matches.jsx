@@ -114,7 +114,7 @@ const Matches = () => {
       {videogames && videogames.map(videogame =>
         <div className={`${styles['Matches__videogame']}`} key={videogame.id}>
           <span className={`${styles['Matches__videogame__title']}`}>{videogame.name}</span>
-          <ItemsContainer>
+          <ItemsContainer className={`${styles['Matches__itemsContainer']}`}>
             {matches.filter(match => videogame.name === match.videogame.name).map(match => (
               <MatchItem key={match.id} match={match} matches={matches} />
             ))}
