@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loginSuccess } from '../../../Trumps/Stores/Authentication/actions';
 
 import { useAuthenticationStore } from '../../../Trumps/Stores/Authentication/store';
@@ -10,11 +10,13 @@ const MatchItem = ({ match, className, ...rest }) => {
   const [coins, setCoins] = useState(10);
   const [user, setUser] = useState({});
   const [alreadyBet, setAlreadyBet] = useState(false);
+  const [bets, setBets] = useState([]);
 
   const { authentication, dispatch } = useAuthenticationStore();
 
   useEffect(() => authentication?.id !== null && (async () => setUser((await axios.get(`http://localhost:3001/users/${authentication.id}`))?.data))(), []);
-  useEffect(() => axios.get('http://localhost:3001/bets/').then(r => r.data.find(e => e.user === authentication.id && e.match === match.id && setAlreadyBet(e))), []);
+  useEffect(() => (async () => setBets((await axios.get('http://localhost:3001/bets/'))?.data))(), []);
+  useEffect(() => axios.get('http://localhost:3001/bets/').then(r => r.data.find(e => e.user === authentication.id && e.match === match.id && setAlreadyBet(e))));
 
   const status = match.status;
   const opponent1 = match.opponents[0].opponent;
@@ -31,20 +33,17 @@ const MatchItem = ({ match, className, ...rest }) => {
   const toBet = (team = false) => {
     (authentication.coins === 0 || authentication.coins < coins)
       ? alert('Tricher c\'est mal :@')
-      : (axios.get('http://localhost:3001/bets/').then(response => {
-        !alreadyBet
-          ? axios.put(`http://localhost:3001/users/${authentication.id}/`, { ...user, coins: (user.coins - coins) }) &&
-          axios.post('http://localhost:3001/bets/', {
-            user: user.id,
-            match: match.id,
-            team,
-            coins,
-            status: 'waiting_result'
-          }) &&
-          dispatch(loginSuccess({ ...user, coins: (user.coins - coins) }))
-          : alert('Vous avez déjà parier sur ce match !')
-        ;
-      }))
+      : !alreadyBet
+        ? axios.put(`http://localhost:3001/users/${authentication.id}/`, { ...user, coins: (user.coins - coins) }) &&
+        axios.post('http://localhost:3001/bets/', {
+          user: user.id,
+          match: match.id,
+          team,
+          coins,
+          status: 'waiting_result'
+        }) &&
+        dispatch(loginSuccess({ ...user, coins: (user.coins - coins) }))
+        : alert('Vous avez déjà parier sur ce match !')
     ;
   };
 
@@ -75,9 +74,16 @@ const MatchItem = ({ match, className, ...rest }) => {
       </div>
       <div className={`${styles['MatchItem__bet__buttons']}`}>
         <button disabled={authentication.coins === 0 || alreadyBet}
-                onClick={() => toBet(opponent1.id)}>{opponent1.name}</button>
+                onClick={() => toBet(opponent1.id)}
+        >
+          {opponent1.name}
+        </button>
         <button disabled={authentication.coins === 0 || alreadyBet} onClick={() => toBet()}>Ex æquo</button>
-        <button disabled={authentication.coins === 0 || alreadyBet} onClick={() => toBet(opponent2.id)}>{opponent2.name}</button>
+        <button disabled={authentication.coins === 0 || alreadyBet}
+                onClick={() => toBet(opponent2.id)}
+        >
+          {opponent2.name}
+        </button>
       </div>
     </div>}
   </div>;
