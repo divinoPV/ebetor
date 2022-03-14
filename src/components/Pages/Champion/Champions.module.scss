@@ -1,0 +1,20 @@
+@import '../../../style/settings/colors';
+
+.Champions {
+  &__message {
+    align-items: center;
+    background: $mandarin;
+    border-radius: 21px;
+    display: inline-flex;
+    margin-bottom: 21px;
+    padding: 5px 13px;
+    width: fit-content;
+
+    svg {
+      fill: $white;
+      height: 16px;
+      margin-right: 5px;
+      width: 16px;
+    }
+  }
+}

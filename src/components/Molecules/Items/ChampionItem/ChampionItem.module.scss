@@ -1,0 +1,36 @@
+@import '../../../../style/tools/relative_item';
+@import '../../../../style/settings/colors';
+
+.ChampionItem {
+  align-items: center;
+  background: $blue-sapphire;
+  border-radius: 13px;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 13px;
+  text-decoration: none;
+
+  &__name {
+    display: block;
+    text-align: center;
+  }
+
+  &__image {
+    @include relative_item(144px, 144px);
+  }
+
+  &__info {
+    width: 100%;
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    padding: 0 21px;
+    width: 80%;
+  }
+}
