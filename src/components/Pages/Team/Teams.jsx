@@ -7,6 +7,7 @@ import Main from '../../Organisms/Main/Main';
 import ItemsContainer from '../../Organisms/Container/ItemsContainer/ItemsContainer';
 import TeamItem from '../../Molecules/Items/TeamItem/TeamItem';
 import { useBetStore } from '../../Trumps/Stores/Bet/store';
+import styles from './Teams.module.scss';
 
 const Teams = () => {
   const [teams, setTeams] = useState([]);
@@ -25,14 +26,15 @@ const Teams = () => {
           case 'lol-wild-rift':
             return 'lol-wild-rift';
           case 'league-of-legends':
-            return 'lol'
+            return 'lol';
           default:
-            return bet.videogame.slug.split('').map(v => v === '-' ? '' : v).join('')
+            return bet.videogame.slug.split('').map(v => v === '-' ? '' : v).join('');
         }
       }
 
       return '';
     })();
+
     axios.get(`${slugGame}/teams?sort=name&page=${~~(itemOffset / itemsPerPage) + 1}&per_page=${itemsPerPage}`).then(response => {
       const nbElements = response.headers['x-total'];
       setTotalItems(nbElements);
@@ -44,7 +46,7 @@ const Teams = () => {
   return <>
     <Header active="teams" />
     <Main>
-      <ItemsContainer>
+      <ItemsContainer className={`${styles['Teams__itemsContainer']}`}>
         {teams && teams.map(team =>
           <TeamItem key={team.id}
                     alt={`Logo de la team ${team.name}`}
@@ -55,12 +57,13 @@ const Teams = () => {
       </ItemsContainer>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="suivant"
+        nextLabel="suivant >"
         onPageChange={e => setItemOffset((e.selected * itemsPerPage) % totalItems)}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="précédent"
+        previousLabel="< précédent"
         renderOnZeroPageCount={null}
+        className="o-paginator"
       />
     </Main>
   </>;

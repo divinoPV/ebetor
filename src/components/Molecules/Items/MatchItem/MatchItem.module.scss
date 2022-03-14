@@ -52,28 +52,28 @@
         }
 
         button:first-of-type {
-          background: $bright-maroon;
+          background: $old-lavender;
 
           &:hover {
-            background: lighten($bright-maroon, 20%);
+            background: lighten($old-lavender, 20%);
           }
 
           &[disabled] {
             color: darken($white, 20%);
-            background: darken($bright-maroon, 20%);
+            background: darken($old-lavender, 20%);
           }
         }
 
         button:last-of-type {
-          background: $antique-ruby;
+          background: $carrot-orange;
 
           &:hover {
-            background: lighten($antique-ruby, 20%);
+            background: lighten($carrot-orange, 20%);
           }
 
           &[disabled] {
             color: darken($white, 20%);
-            background: darken($bright-maroon, 20%);
+            background: darken($carrot-orange, 20%);
           }
         }
       }
@@ -93,6 +93,39 @@
         margin-bottom: 21px;
       }
     }
+
+    &__forThisTeam {
+      background: greenyellow !important;
+      color: $black !important;
+      text-decoration: none !important;
+    }
+  }
+
+  &__live {
+    margin-top: 21px;
+  }
+
+  &__cantBet {
+    align-items: center;
+    background: $antique-ruby;
+    border-radius: 21px;
+    display: inline-flex;
+    margin-top: 13px;
+    padding: 5px 13px;
+
+    svg {
+      fill: $white;
+      height: 16px;
+      width: 16px;
+
+      &:first-child {
+        margin-right: 8px;
+      }
+
+      &:last-child {
+        margin-left: 8px;
+      }
+    }
   }
 
   &__leading {
@@ -108,7 +141,8 @@
     }
 
     &__status {
-      background: $crimson;
+      background: $columbia-blue;
+      color: $gunmetal;
       border-radius: 21px;
       padding: 5px 13px;
     }

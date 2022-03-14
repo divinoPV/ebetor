@@ -1,6 +1,10 @@
 @import '../../../style/settings/colors';
 
 .Matches {
+  &__itemsContainer {
+    flex-flow: column nowrap;
+  }
+
   &__leading {
     display: flex;
     flex-direction: column;
