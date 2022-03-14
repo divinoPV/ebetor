@@ -6,7 +6,7 @@ Betting on the best e-sports matches thanks to Ebetor.
 
 Execute commands in your favorite terminal :
 
-1. Clone project `git clone git@github.com:divinoPV/Ebetor.git`
+1. Clone project `git clone git@github.com:divinoPV/ebetor.git`
 2. Go to Linux hosts file `sudo nano \etc\hosts`, enter your password
 3. Add line `127.0.0.1 ebetor.co` and save file
 4. Go in project `cd %PROJECT_PATH%\Ebetor`
