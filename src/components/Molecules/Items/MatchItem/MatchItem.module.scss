@@ -52,28 +52,28 @@
         }
 
         button:first-of-type {
-          background: $bright-maroon;
+          background: $old-lavender;
 
           &:hover {
-            background: lighten($bright-maroon, 20%);
+            background: lighten($old-lavender, 20%);
           }
 
           &[disabled] {
             color: darken($white, 20%);
-            background: darken($bright-maroon, 20%);
+            background: darken($old-lavender, 20%);
           }
         }
 
         button:last-of-type {
-          background: $antique-ruby;
+          background: $carrot-orange;
 
           &:hover {
-            background: lighten($antique-ruby, 20%);
+            background: lighten($carrot-orange, 20%);
           }
 
           &[disabled] {
             color: darken($white, 20%);
-            background: darken($bright-maroon, 20%);
+            background: darken($carrot-orange, 20%);
           }
         }
       }
@@ -92,6 +92,12 @@
         justify-content: space-between;
         margin-bottom: 21px;
       }
+    }
+
+    &__forThisTeam {
+      background: greenyellow !important;
+      color: $black !important;
+      text-decoration: none !important;
     }
   }
 
